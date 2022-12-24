@@ -1,5 +1,4 @@
 from tkintermapview import TkinterMapView
-import tkinter
 import regex
 import customtkinter
 import requests
@@ -116,8 +115,10 @@ class App(customtkinter.CTk):
         if self.CEP_Entry.get() != "":
             # Request to the Via CEP API
             response = requests.get(f"http://viacep.com.br/ws/{self.CEP_Entry.get()}/json/")
+            print(response.status_code)
             if response.status_code == 200:
                 res_json = response.json()
+                print(res_json)
                 parse_json_text = [res_json]
                 df = pd.DataFrame(parse_json_text)
                 if 'erro' not in df.columns:
@@ -126,9 +127,15 @@ class App(customtkinter.CTk):
                     self.city.configure(text=f"City: {df['localidade'][0]}")
                     self.neighborhood.configure(text=f"Neighborhood: {df['logradouro'][0]}")
                     self.complement.configure(text=f"Complement: {df['complemento'][0]}")
+                    if not df['complemento'][0] == "":
+                        self.complement.configure(text=f"Complement: {df['complemento'][0]}")
+                    else:
+                        self.complement.configure(text=f"Complement: -")
                     self.map_widget.set_address(f"{df['localidade'][0]}, {df['logradouro'][0]}, {df['bairro'][0]}")
-                    self.map_widget.update()
                     self.valid_CEP.configure(text="")
+                    return
+                else:
+                    self.valid_CEP.configure(text="CEP is valid, but wasn't found.")
                     return
         self.clean_fields()
 
