@@ -22,10 +22,10 @@
 ## <ins>How to use it</ins>
 
 - Download the files on this repository.
-- Download the Dataset at "https://drive.google.com/file/d/1e0HUmU2TOZ83guxo5hz1inl1I1rCIMM9/view" and import it on the "sample_data" folder on google colab.
-- Run it.
+- Run the command "pip install -r requirements.txt" on the project's directory
+- Run the python script.
 
 ## <ins>Interface</ins>
 
-## <ins>Exemple of use</ins>
+![Screenshot_1](https://user-images.githubusercontent.com/67275098/209426551-80bef941-6b31-4b45-b464-322d24112670.png)
 
